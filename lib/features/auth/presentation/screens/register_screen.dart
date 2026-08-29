@@ -18,7 +18,7 @@ class RegisterScreen extends StatelessWidget {
           AppDialogs.loadingDialog(context);
         } else if (state is AuthSuccsesState) {
           context.pop();
-          context.pushToBase(Routes.mainScreen);
+          context.pushToBase(Routes.homeScreen);
         } else if (state is AuthErrorState) {
           context.pop();
           AppDialogs.errorDialog(context, message: 'Invalid email or password');

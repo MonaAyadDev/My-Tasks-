@@ -1,4 +1,4 @@
-class Datum {
+class RequestModel {
   int? taskId;
   String? title;
   String? description;
@@ -7,7 +7,7 @@ class Datum {
   String? priority;
   String? createdAt;
 
-  Datum({
+  RequestModel({
     this.taskId,
     this.title,
     this.description,
@@ -17,23 +17,23 @@ class Datum {
     this.createdAt,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
-    taskId: json['taskId'] as int?,
+  factory RequestModel.fromJson(Map<String, dynamic> json) => RequestModel(
+    taskId: json['id'] as int? ?? json['taskId'] as int?,
     title: json['title'] as String?,
     description: json['description'] as String?,
     status: json['status'] as String?,
-    deliveryDate: json['deliveryDate'] as String?,
+    deliveryDate:
+        json['delivery_date'] as String? ?? json['deliveryDate'] as String?,
     priority: json['priority'] as String?,
-    createdAt: json['createdAt'] as String?,
+    createdAt: json['created_at'] as String? ?? json['createdAt'] as String?,
   );
 
   Map<String, dynamic> toJson() => {
-    'taskId': taskId,
+    if (taskId != null) 'taskId': taskId,
     'title': title,
     'description': description,
     'status': status,
-    'deliveryDate': deliveryDate,
+    'delivery_date': deliveryDate,
     'priority': priority,
-    'createdAt': createdAt,
   };
 }

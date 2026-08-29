@@ -13,8 +13,5 @@ class Data {
         : User.fromJson(json['user'] as Map<String, dynamic>),
   );
 
-  Map<String, dynamic> toJson() => {
-    'token': token,
-    'user': user?.toJson(),
-  };
+  Map<String, dynamic> toJson() => {'token': token, 'user': user?.toJson()};
 }

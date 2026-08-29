@@ -8,6 +8,10 @@ class MainFormField extends StatelessWidget {
     this.label,
     this.hint,
     this.prefixIcon,
+    this.validator,
+    this.readOnly = false,
+    this.onTap,
+    this.maxLines = 1,
   });
 
   final TextEditingController? controller;
@@ -15,13 +19,20 @@ class MainFormField extends StatelessWidget {
   final String? label;
   final String? hint;
   final Widget? prefixIcon;
+  final String? Function(String?)? validator;
+  final bool readOnly;
+  final VoidCallback? onTap;
+  final int maxLines;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
-      textDirection: TextDirection.ltr,
+      validator: validator,
+      readOnly: readOnly,
+      onTap: onTap,
+      maxLines: maxLines,
       decoration: InputDecoration(
         labelText: label,
         hintText: hint,

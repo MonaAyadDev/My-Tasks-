@@ -9,6 +9,7 @@ A sleek, intuitive Task Management application built to help users seamlessly cr
 | Login Screen | Register Screen | Tasks List |
 | :---: | :---: | :---: |
 | <img src="picture/login.png" width="250"/> | <img src="picture/register.png" width="250"/> | <img src="picture/list.png" width="250"/> |
+| <img src="picture/add_task.png" width="250"/> | <img src="picture/edit_task.png" width="250"/> | <img src="picture/task_details.png" width="250"/> |
 
 ---
 

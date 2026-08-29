@@ -6,6 +6,7 @@ import 'package:my_tasks/features/auth/presentation/screens/login_screen.dart';
 import 'package:my_tasks/features/auth/presentation/screens/register_screen.dart';
 import 'package:my_tasks/features/home/presentation/cubit/home_cubit.dart';
 import 'package:my_tasks/features/home/presentation/screens/home_screen.dart';
+import 'package:my_tasks/features/home/presentation/screens/show_task_screen.dart';
 
 class AppRouter {
   static MaterialPageRoute<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -31,6 +32,15 @@ class AppRouter {
             child: HomeScreen(),
           ),
         );
+      case Routes.showScreen:
+        final taskId = settings.arguments as int;
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => HomeCubit()..showTasks(taskId: taskId),
+            child: const ShowTaskScreen(),
+          ),
+        );
+
       default:
         return MaterialPageRoute(
           builder: (context) => Scaffold(

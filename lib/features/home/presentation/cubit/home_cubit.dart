@@ -11,6 +11,8 @@ class HomeCubit extends Cubit<HomeState> {
 
   final titleController = TextEditingController();
   final desController = TextEditingController();
+  final deliveryDateController = TextEditingController();
+
   Future<void> tasks() async {
     emit(HomeLoading());
     try {
@@ -25,15 +27,26 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  Future<void> updateTasks({required int id}) async {
+  Future<void> updateTasks({
+    required int taskId,
+    String? status,
+    String? priority,
+    String? deliveryDate,
+  }) async {
     emit(UpdateTaskLoading());
     try {
-      final response = await HomeRepo.updateTasks(
-        taskId: id,
-        title: titleController.text,
-        des: desController.text,
+      final success = await HomeRepo.updateTasks(
+        RequestModel(
+          taskId: taskId,
+          title: titleController.text,
+          description: desController.text,
+          status: status,
+          priority: priority,
+          deliveryDate: deliveryDate,
+        ),
       );
-      if (response != null) {
+
+      if (success) {
         await tasks();
         emit(UpdateTaskSuccess());
       } else {
@@ -41,6 +54,43 @@ class HomeCubit extends Cubit<HomeState> {
       }
     } catch (e) {
       emit(UpdateTaskError());
+    }
+  }
+
+  Future<void> showTasks({required int taskId}) async {
+    emit(ShowTaskLoading());
+    try {
+      final response = await HomeRepo.showTasks(RequestModel(taskId: taskId));
+
+      if (response != null && response.data != null) {
+        emit(ShowTaskSuccess(response.data!));
+      } else {
+        emit(ShowTaskError('Failed to load task details'));
+      }
+    } catch (e) {
+      emit(ShowTaskError(e.toString()));
+    }
+  }
+
+  Future<void> addTasks() async {
+    emit(AddTaskLoading());
+    try {
+      final success = await HomeRepo.addTasks(
+        RequestModel(
+          title: titleController.text,
+          description: desController.text,
+          deliveryDate: deliveryDateController.text,
+        ),
+      );
+
+      if (success) {
+        await tasks();
+        emit(AddTaskSuccess());
+      } else {
+        emit(AddTaskError());
+      }
+    } catch (e) {
+      emit(AddTaskError());
     }
   }
 

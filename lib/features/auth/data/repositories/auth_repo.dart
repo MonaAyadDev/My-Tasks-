@@ -33,7 +33,7 @@ class AuthRepo {
   static Future<AuthResponse?> register(AuthParams data) async {
     try {
       var response = await DioHelper.post(
-        endPoint: Apis.register, 
+        endPoint: Apis.register,
         data: data.toJson(),
       );
 

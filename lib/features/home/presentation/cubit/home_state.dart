@@ -8,7 +8,7 @@ class HomeInitial extends HomeState {}
 class HomeLoading extends HomeState {}
 
 class HomeSuccess extends HomeState {
-  final List<Datum> data;
+  final List<RequestModel> data;
   HomeSuccess(this.data);
 }
 
@@ -22,3 +22,22 @@ class UpdateTaskLoading extends HomeState {}
 class UpdateTaskSuccess extends HomeState {}
 
 class UpdateTaskError extends HomeState {}
+
+class ShowTaskLoading extends HomeState {}
+
+class ShowTaskSuccess extends HomeState {
+  final RequestModel task;
+  ShowTaskSuccess(this.task);
+}
+
+class ShowTaskError extends HomeState {
+  final String message;
+  ShowTaskError(this.message);
+}
+
+
+class AddTaskLoading extends HomeState {}
+
+class AddTaskSuccess extends HomeState {}
+
+class AddTaskError extends HomeState {}
